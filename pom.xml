@@ -24,7 +24,7 @@
     <properties>
         <version.microservice.audit-api>1.4</version.microservice.audit-api>
         <version.microservice.authorization-api>1.4</version.microservice.authorization-api>
-        <version.microservice.starter>1.4</version.microservice.starter>
+        <version.microservice.starter>1.6.1</version.microservice.starter>
     </properties>
     <dependencyManagement>
         <dependencies>

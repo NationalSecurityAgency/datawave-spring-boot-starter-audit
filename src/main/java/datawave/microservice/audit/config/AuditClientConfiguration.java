@@ -16,6 +16,6 @@ public class AuditClientConfiguration {
     @Qualifier("auditRequestValidator")
     @ConditionalOnMissingBean
     public Supplier<AuditParameters> auditValidationSupplier() {
-        return () -> (new AuditParameters());
+        return AuditParameters::new;
     }
 }

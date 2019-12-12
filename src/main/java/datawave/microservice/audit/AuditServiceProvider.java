@@ -69,7 +69,7 @@ public class AuditServiceProvider {
     protected ServiceInstance getDefaultServiceInstance() {
         logger.debug("Returning default ServiceInstance for auditing: {}", properties.getUri());
         final URI uri = URI.create(properties.getUri());
-        return new DefaultServiceInstance(properties.getServiceId(), uri.getHost(), uri.getPort(), uri.getScheme().equals("https"));
+        return new DefaultServiceInstance(null, properties.getServiceId(), uri.getHost(), uri.getPort(), uri.getScheme().equals("https"));
     }
     
     AuditServiceProperties getProperties() {

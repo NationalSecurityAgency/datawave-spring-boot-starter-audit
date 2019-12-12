@@ -6,11 +6,8 @@ import datawave.microservice.audit.config.AuditServiceConfiguration;
 import datawave.microservice.authorization.user.ProxiedUserDetails;
 import datawave.webservice.common.audit.AuditParameters;
 import datawave.webservice.common.audit.Auditor;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +20,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -35,7 +31,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
+import static datawave.microservice.audit.TestUtils.assertHttpException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
@@ -46,16 +45,12 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  * <p>
  * Utilizes mocked audit server to verify that expected REST calls are made
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(classes = AuditClientTest.TestConfiguration.class)
 @ActiveProfiles({"AuditClientTest", "audit-enabled"})
 public class AuditClientTest {
     
     private static final String EXPECTED_AUDIT_URI = "http://localhost:11111/audit/v1/audit";
-    
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
     
     @Autowired
     private AuditClient auditClient;
@@ -69,21 +64,21 @@ public class AuditClientTest {
     private MockRestServiceServer mockServer;
     private ProxiedUserDetails defaultUserDetails;
     
-    @Before
-    public void setup() throws Exception {
+    @BeforeEach
+    public void setup() {
         defaultUserDetails = TestUtils.userDetails(Collections.singleton("AuthorizedUser"), Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I"));
         setupMockAuditServer();
     }
     
     @Test
     public void verifyAutoConfig() {
-        assertEquals("One AuditClient bean should have been found", 1, context.getBeanNamesForType(AuditClient.class).length);
-        assertEquals("One AuditServiceConfiguration bean should have been found", 1, context.getBeanNamesForType(AuditServiceConfiguration.class).length);
-        assertEquals("One AuditServiceProvider bean should have been found", 1, context.getBeanNamesForType(AuditServiceProvider.class).length);
+        assertEquals(1, context.getBeanNamesForType(AuditClient.class).length, "One AuditClient bean should have been found");
+        assertEquals(1, context.getBeanNamesForType(AuditServiceConfiguration.class).length, "One AuditServiceConfiguration bean should have been found");
+        assertEquals(1, context.getBeanNamesForType(AuditServiceProvider.class).length, "One AuditServiceProvider bean should have been found");
     }
     
     @Test
-    public void testAuditURISuccess() throws Exception {
+    public void testAuditURISuccess() {
         
         MultiValueMap<String,String> parameters = new LinkedMultiValueMap<>();
         parameters.add(TestAuditParameters.TEST_PARAM_1, "tp1Value");
@@ -109,8 +104,8 @@ public class AuditClientTest {
         //@formatter:on
     }
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testMissingTestParam2() throws Exception {
+    @Test
+    public void testMissingTestParam2() {
         
         MultiValueMap<String,String> parameters = new LinkedMultiValueMap<>();
         parameters.add(TestAuditParameters.TEST_PARAM_1, "tp1Value");
@@ -127,14 +122,11 @@ public class AuditClientTest {
                 .withQueryLogic("QueryLogic")
                 .build();
         //@formatter:on
-        AuditClient.validate(auditRequest, new TestAuditParameters());
+        assertThrows(IllegalArgumentException.class, () -> AuditClient.validate(auditRequest, new TestAuditParameters()));
     }
     
     @Test
     public void testAuditURIServerError() {
-        expectedException.expect(HttpServerErrorException.class);
-        expectedException.expect(new TestUtils.StatusMatcher(500));
-        
         MultiValueMap<String,String> parameters = new LinkedMultiValueMap<>();
         parameters.add("paramFoo", "paramFooValue");
         parameters.add("paramBar", "paramBarValue");
@@ -153,14 +145,14 @@ public class AuditClientTest {
                 .andExpect(content().formData(auditRequest.paramMap))
                 .andRespond(withServerError());
 
-        auditClient.submit(auditRequest);
+        assertHttpException(HttpServerErrorException.class, 500, () -> auditClient.submit(auditRequest));
         mockServer.verify();
 
         //@formatter:on
     }
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testBuildMissingAuditParams1() throws Exception {
+    @Test
+    public void testBuildMissingAuditParams1() {
         
         // No AuditType specified this time
         
@@ -172,11 +164,11 @@ public class AuditClientTest {
             .withQueryLogic("QueryLogic")
             .build();
         //@formatter:on
-        AuditClient.validate(auditRequest, new AuditParameters());
+        assertThrows(IllegalArgumentException.class, () -> AuditClient.validate(auditRequest, new AuditParameters()));
     }
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testBuildMissingAuditParams2() throws Exception {
+    @Test
+    public void testBuildMissingAuditParams2() {
         
         // No query specified this time
         
@@ -188,7 +180,7 @@ public class AuditClientTest {
             .withQueryLogic("QueryLogic")
             .build();
         //@formatter:on
-        AuditClient.validate(auditRequest, new AuditParameters());
+        assertThrows(IllegalArgumentException.class, () -> AuditClient.validate(auditRequest, new AuditParameters()));
     }
     
     /**
@@ -196,6 +188,7 @@ public class AuditClientTest {
      */
     private void setupMockAuditServer() {
         RestTemplate auditorRestTemplate = (RestTemplate) new DirectFieldAccessor(auditClient).getPropertyValue("jwtRestTemplate");
+        assertNotNull(auditorRestTemplate);
         mockServer = MockRestServiceServer.createServer(auditorRestTemplate);
     }
     

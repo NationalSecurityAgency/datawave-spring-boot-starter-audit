@@ -5,6 +5,8 @@ import datawave.security.authorization.DatawaveUser;
 import datawave.security.authorization.SubjectIssuerDNPair;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.function.Executable;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -24,6 +26,11 @@ public class TestUtils {
     public static ProxiedUserDetails userDetails(Collection<String> assignedRoles, Collection<String> assignedAuths) {
         DatawaveUser dwUser = new DatawaveUser(USER_DN, USER, assignedAuths, assignedRoles, null, System.currentTimeMillis());
         return new ProxiedUserDetails(Collections.singleton(dwUser), dwUser.getCreationTime());
+    }
+    
+    public static <T extends HttpStatusCodeException> void assertHttpException(Class<T> exceptionClass, int statusCode, Executable executable) {
+        HttpStatusCodeException thrown = Assertions.assertThrows(exceptionClass, executable);
+        Assertions.assertEquals(statusCode, thrown.getRawStatusCode(), "Unexpected HTTP status code");
     }
     
     /**

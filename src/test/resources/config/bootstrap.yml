@@ -8,6 +8,8 @@ spring:
       enabled: false
       discovery:
         enabled: false
+    stream:
+      default-binder: integration
   main:
     banner-mode: "OFF"
 

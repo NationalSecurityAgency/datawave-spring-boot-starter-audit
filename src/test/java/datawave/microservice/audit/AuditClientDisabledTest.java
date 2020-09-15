@@ -1,6 +1,7 @@
 package datawave.microservice.audit;
 
 import datawave.microservice.audit.config.AuditServiceConfiguration;
+import datawave.microservice.audit.replay.ReplayClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class AuditClientDisabledTest {
     @Test
     public void verifyAutoConfig() {
         assertEquals("No AuditClient beans should have been found", 0, context.getBeanNamesForType(AuditClient.class).length);
+        assertEquals("No ReplayClient beans should have been found", 0, context.getBeanNamesForType(ReplayClient.class).length);
         assertEquals("No AuditServiceConfiguration beans should have been found", 0, context.getBeanNamesForType(AuditServiceConfiguration.class).length);
         assertEquals("No AuditServiceProvider beans should have been found", 0, context.getBeanNamesForType(AuditServiceProvider.class).length);
     }

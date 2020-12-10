@@ -23,7 +23,7 @@
         <url>https://github.com/NationalSecurityAgency/datawave-spring-boot-starter-audit</url>
     </scm>
     <properties>
-        <version.microservice.audit-api>1.8</version.microservice.audit-api>
+        <version.microservice.audit-api>1.9</version.microservice.audit-api>
         <version.microservice.authorization-api>1.4</version.microservice.authorization-api>
         <version.microservice.starter>1.6.3</version.microservice.starter>
     </properties>

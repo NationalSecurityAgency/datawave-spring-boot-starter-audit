@@ -44,16 +44,14 @@ audit-client:
 
 ---
 
-spring:
-  profiles: audit-disabled
+spring.config.activate.on-profile: audit-disabled
 
 audit-client:
   enabled: false
 
 ---
 
-spring:
-  profiles: audit-enabled
+spring.config.activate.on-profile: audit-enabled
 
 audit-client:
   uri: '${AUDIT_SERVER_URL:http://localhost:11111/audit}'

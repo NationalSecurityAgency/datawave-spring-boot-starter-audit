@@ -213,8 +213,8 @@ public class AuditClient {
                 return this;
             }
             
-            public Builder withDatawaveUserDetails(DatawaveUserDetails DatawaveUserDetails) {
-                this.datawaveUserDetails = DatawaveUserDetails;
+            public Builder withDatawaveUserDetails(DatawaveUserDetails datawaveUserDetails) {
+                this.datawaveUserDetails = datawaveUserDetails;
                 return this;
             }
             

@@ -3,7 +3,7 @@ package datawave.microservice.audit;
 import datawave.marking.ColumnVisibilitySecurityMarking;
 import datawave.marking.SecurityMarking;
 import datawave.microservice.audit.config.AuditServiceConfiguration;
-import datawave.microservice.authorization.user.ProxiedUserDetails;
+import datawave.microservice.authorization.user.DatawaveUserDetails;
 import datawave.webservice.common.audit.AuditParameters;
 import datawave.webservice.common.audit.Auditor;
 import org.junit.jupiter.api.Assertions;
@@ -63,7 +63,7 @@ public class AuditClientTest {
     private ApplicationContext context;
     
     private MockRestServiceServer mockServer;
-    private ProxiedUserDetails defaultUserDetails;
+    private DatawaveUserDetails defaultUserDetails;
     
     @BeforeEach
     public void setup() throws Exception {
@@ -89,7 +89,7 @@ public class AuditClientTest {
         final AuditClient.Request auditRequest = new AuditClient.Request.Builder()
                 .withParams(parameters)
                 .withQueryExpression("FIELD:VALUE1 OR FIELD:VALUE2")
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withMarking(auditTestSecurityMarking)
                 .withAuditType(Auditor.AuditType.LOCALONLY)
                 .withQueryLogic("QueryLogic")
@@ -117,7 +117,7 @@ public class AuditClientTest {
         final AuditClient.Request auditRequest = new AuditClient.Request.Builder()
                 .withParams(parameters)
                 .withQueryExpression("FIELD:VALUE1 OR FIELD:VALUE2")
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withMarking(auditTestSecurityMarking)
                 .withAuditType(Auditor.AuditType.LOCALONLY)
                 .withQueryLogic("QueryLogic")
@@ -138,7 +138,7 @@ public class AuditClientTest {
         //@formatter:off
         final AuditClient.Request auditRequest = new AuditClient.Request.Builder()
                 .withQueryExpression("FIELD:VALUE1 OR FIELD:VALUE2")
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withMarking(auditTestSecurityMarking)
                 .withAuditType(Auditor.AuditType.LOCALONLY)
                 .withQueryLogic("QueryLogic")
@@ -163,7 +163,7 @@ public class AuditClientTest {
         //@formatter:off
         final AuditClient.Request auditRequest = new AuditClient.Request.Builder()
             .withQueryExpression("FIELD:VALUE1 OR FIELD:VALUE2")
-            .withProxiedUserDetails(defaultUserDetails)
+            .withDatawaveUserDetails(defaultUserDetails)
             .withMarking(auditTestSecurityMarking)
             .withQueryLogic("QueryLogic")
             .build();
@@ -179,7 +179,7 @@ public class AuditClientTest {
         //@formatter:off
         final AuditClient.Request auditRequest = new AuditClient.Request.Builder()
             .withAuditType(Auditor.AuditType.PASSIVE)
-            .withProxiedUserDetails(defaultUserDetails)
+            .withDatawaveUserDetails(defaultUserDetails)
             .withMarking(auditTestSecurityMarking)
             .withQueryLogic("QueryLogic")
             .build();

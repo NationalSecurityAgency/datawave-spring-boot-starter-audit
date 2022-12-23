@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import datawave.microservice.audit.AuditServiceProvider;
 import datawave.microservice.audit.replay.status.Status;
 import datawave.microservice.authorization.jwt.JWTRestTemplate;
-import datawave.microservice.authorization.user.ProxiedUserDetails;
+import datawave.microservice.authorization.user.DatawaveUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -289,7 +289,7 @@ public class ReplayClient {
     
     protected void validateRequest(Request request) {
         Preconditions.checkNotNull(request, "request cannot be null");
-        Preconditions.checkNotNull(request.proxiedUserDetails, "proxiedUserDetails cannot be null");
+        Preconditions.checkNotNull(request.datawaveUserDetails, "DatawaveUserDetails cannot be null");
     }
     
     private Object submitRequest(ReplayMethod replayMethod, Request request) {
@@ -307,7 +307,7 @@ public class ReplayClient {
 
         ResponseEntity<?> response = jwtRestTemplate.exchange(
                 jwtRestTemplate.createRequestEntity(
-                        request.proxiedUserDetails,
+                        request.datawaveUserDetails,
                         request.paramMap,
                         null,
                         replayMethod.getHttpMethod(), uri),
@@ -333,7 +333,7 @@ public class ReplayClient {
      * @see Request.Builder
      */
     public static class Request {
-        protected ProxiedUserDetails proxiedUserDetails;
+        protected DatawaveUserDetails datawaveUserDetails;
         protected String id;
         protected MultiValueMap<String,String> paramMap;
         
@@ -348,7 +348,7 @@ public class ReplayClient {
          *            {@link Builder} for the replay request
          */
         protected Request(Builder builder) {
-            this.proxiedUserDetails = builder.proxiedUserDetails;
+            this.datawaveUserDetails = builder.datawaveUserDetails;
             this.id = builder.id;
             
             MultiValueMap<String,String> paramMap = new LinkedMultiValueMap<>();
@@ -370,14 +370,14 @@ public class ReplayClient {
          * Builder for replay requests
          */
         public static class Builder {
-            protected ProxiedUserDetails proxiedUserDetails;
+            protected DatawaveUserDetails datawaveUserDetails;
             protected String pathUri;
             protected Long sendRate;
             protected Boolean replayUnfinishedFiles;
             protected String id;
             
-            public Builder withProxiedUserDetails(ProxiedUserDetails proxiedUserDetails) {
-                this.proxiedUserDetails = proxiedUserDetails;
+            public Builder withDatawaveUserDetails(DatawaveUserDetails datawaveUserDetails) {
+                this.datawaveUserDetails = datawaveUserDetails;
                 return this;
             }
             

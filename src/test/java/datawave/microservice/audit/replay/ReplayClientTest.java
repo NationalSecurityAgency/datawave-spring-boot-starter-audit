@@ -3,7 +3,7 @@ package datawave.microservice.audit.replay;
 import datawave.microservice.audit.AuditServiceProvider;
 import datawave.microservice.audit.TestUtils;
 import datawave.microservice.audit.config.AuditServiceConfiguration;
-import datawave.microservice.authorization.user.ProxiedUserDetails;
+import datawave.microservice.authorization.user.DatawaveUserDetails;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,7 +53,7 @@ public class ReplayClientTest {
     private ApplicationContext context;
     
     private MockRestServiceServer mockServer;
-    private ProxiedUserDetails defaultUserDetails;
+    private DatawaveUserDetails defaultUserDetails;
     
     @BeforeEach
     public void setup() throws Exception {
@@ -73,7 +73,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withPathUri("hdfs://some-path/")
                 .withSendRate(100l)
                 .withReplayUnfinishedFiles(true)
@@ -93,7 +93,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withSendRate(100l)
                 .withReplayUnfinishedFiles(true)
                 .build();
@@ -113,7 +113,7 @@ public class ReplayClientTest {
     public void testCreateURIServerError() {
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withPathUri("hdfs://some-path/")
                 .withSendRate(100l)
                 .withReplayUnfinishedFiles(true)
@@ -134,7 +134,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withPathUri("hdfs://some-path/")
                 .withSendRate(100l)
                 .withReplayUnfinishedFiles(true)
@@ -154,7 +154,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withSendRate(100l)
                 .withReplayUnfinishedFiles(true)
                 .build();
@@ -176,7 +176,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withId("some-id")
                 .build();
 
@@ -194,7 +194,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .build();
 
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/" + id + "/start"))
@@ -212,7 +212,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .build();
 
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/startAll"))
@@ -229,7 +229,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withId("some-id")
                 .build();
 
@@ -247,7 +247,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .build();
 
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/" + id + "/status"))
@@ -265,7 +265,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .build();
 
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/statusAll"))
@@ -282,7 +282,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withId("some-id")
                 .withSendRate(100l)
                 .build();
@@ -302,7 +302,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withId(id)
                 .build();
 
@@ -322,7 +322,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withSendRate(100l)
                 .build();
 
@@ -343,7 +343,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withSendRate(100l)
                 .build();
 
@@ -361,7 +361,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .build();
 
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/updateAll"))
@@ -381,7 +381,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withId("some-id")
                 .build();
 
@@ -399,7 +399,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .build();
 
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/" + id + "/stop"))
@@ -417,7 +417,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .build();
 
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/stopAll"))
@@ -434,7 +434,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withId("some-id")
                 .build();
 
@@ -452,7 +452,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .build();
 
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/" + id + "/resume"))
@@ -470,7 +470,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .build();
 
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/resumeAll"))
@@ -487,7 +487,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .withId("some-id")
                 .build();
 
@@ -505,7 +505,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .build();
 
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/" + id + "/delete"))
@@ -523,7 +523,7 @@ public class ReplayClientTest {
         
         //@formatter:off
         final ReplayClient.Request replayRequest = new ReplayClient.Request.Builder()
-                .withProxiedUserDetails(defaultUserDetails)
+                .withDatawaveUserDetails(defaultUserDetails)
                 .build();
 
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/deleteAll"))

@@ -1,6 +1,6 @@
 package datawave.microservice.audit;
 
-import datawave.microservice.authorization.user.ProxiedUserDetails;
+import datawave.microservice.authorization.user.DatawaveUserDetails;
 import datawave.security.authorization.DatawaveUser;
 import datawave.security.authorization.SubjectIssuerDNPair;
 import org.hamcrest.Description;
@@ -19,11 +19,11 @@ public class TestUtils {
     public static final SubjectIssuerDNPair USER_DN = SubjectIssuerDNPair.of("userDn", "issuerDn");
     
     /**
-     * Build ProxiedUserDetails instance with the specified user roles and auths
+     * Build DatawaveUserDetails instance with the specified user roles and auths
      */
-    public static ProxiedUserDetails userDetails(Collection<String> assignedRoles, Collection<String> assignedAuths) {
+    public static DatawaveUserDetails userDetails(Collection<String> assignedRoles, Collection<String> assignedAuths) {
         DatawaveUser dwUser = new DatawaveUser(USER_DN, USER, assignedAuths, assignedRoles, null, System.currentTimeMillis());
-        return new ProxiedUserDetails(Collections.singleton(dwUser), dwUser.getCreationTime());
+        return new DatawaveUserDetails(Collections.singleton(dwUser), dwUser.getCreationTime());
     }
     
     /**

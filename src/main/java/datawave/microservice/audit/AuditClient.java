@@ -3,7 +3,7 @@ package datawave.microservice.audit;
 import com.google.common.base.Preconditions;
 import datawave.marking.SecurityMarking;
 import datawave.microservice.authorization.jwt.JWTRestTemplate;
-import datawave.microservice.authorization.user.ProxiedUserDetails;
+import datawave.microservice.authorization.user.DatawaveUserDetails;
 import datawave.security.authorization.DatawaveUser;
 import datawave.webservice.common.audit.AuditParameters;
 import datawave.webservice.common.audit.Auditor;
@@ -125,7 +125,7 @@ public class AuditClient {
         static final String INTERNAL_AUDIT_PARAM_PREFIX = "audit.";
         
         protected MultiValueMap<String,String> paramMap;
-        protected ProxiedUserDetails userDetails;
+        protected DatawaveUserDetails userDetails;
         protected AuditType auditType;
         
         private Request() {}
@@ -148,8 +148,8 @@ public class AuditClient {
             if (null != b.queryExpression) {
                 params.set(AuditParameters.QUERY_STRING, b.queryExpression);
             }
-            if (null != b.proxiedUserDetails) {
-                this.userDetails = b.proxiedUserDetails;
+            if (null != b.datawaveUserDetails) {
+                this.userDetails = b.datawaveUserDetails;
                 final DatawaveUser dwUser = this.userDetails.getPrimaryUser();
                 if (null != dwUser.getAuths() && !params.containsKey(AuditParameters.QUERY_AUTHORIZATIONS)) {
                     params.set(AuditParameters.QUERY_AUTHORIZATIONS, String.join(", ", dwUser.getAuths()));
@@ -191,7 +191,7 @@ public class AuditClient {
             protected Auditor.AuditType auditType;
             protected MultiValueMap<String,String> params;
             protected SecurityMarking marking;
-            protected ProxiedUserDetails proxiedUserDetails;
+            protected DatawaveUserDetails datawaveUserDetails;
             
             public Builder withQueryExpression(String query) {
                 this.queryExpression = query;
@@ -213,8 +213,8 @@ public class AuditClient {
                 return this;
             }
             
-            public Builder withProxiedUserDetails(ProxiedUserDetails proxiedUserDetails) {
-                this.proxiedUserDetails = proxiedUserDetails;
+            public Builder withDatawaveUserDetails(DatawaveUserDetails DatawaveUserDetails) {
+                this.datawaveUserDetails = DatawaveUserDetails;
                 return this;
             }
             

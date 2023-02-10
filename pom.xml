@@ -24,7 +24,7 @@
     </scm>
     <properties>
         <version.microservice.audit-api>1.12-SNAPSHOT</version.microservice.audit-api>
-        <version.microservice.authorization-api>1.14-SNAPSHOT</version.microservice.authorization-api>
+        <version.microservice.authorization-api>1.15-SNAPSHOT</version.microservice.authorization-api>
         <version.microservice.starter>1.6.9-SNAPSHOT</version.microservice.starter>
     </properties>
     <dependencyManagement>

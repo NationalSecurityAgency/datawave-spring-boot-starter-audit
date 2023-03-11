@@ -28,6 +28,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
@@ -102,7 +103,7 @@ public class ReplayClientTest {
                 .andExpect(content().formData(replayRequest.paramMap))
                 .andRespond(withSuccess());
 
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             replayClient.create(replayRequest);
             mockServer.verify();
         });
@@ -123,7 +124,7 @@ public class ReplayClientTest {
                 .andExpect(content().formData(replayRequest.paramMap))
                 .andRespond(withServerError());
 
-        Assertions.assertThrows(HttpServerErrorException.InternalServerError.class, () ->replayClient.create(replayRequest));
+        assertThrows(HttpServerErrorException.InternalServerError.class, () ->replayClient.create(replayRequest));
         mockServer.verify();
 
         //@formatter:on
@@ -163,7 +164,7 @@ public class ReplayClientTest {
                 .andExpect(content().formData(replayRequest.paramMap))
                 .andRespond(withSuccess());
 
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             replayClient.createAndStart(replayRequest);
             mockServer.verify();
         });
@@ -200,7 +201,7 @@ public class ReplayClientTest {
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/" + id + "/start"))
                 .andRespond(withSuccess());
 
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             replayClient.start(replayRequest);
             mockServer.verify();
         });
@@ -253,7 +254,7 @@ public class ReplayClientTest {
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/" + id + "/status"))
                 .andRespond(withSuccess());
 
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             replayClient.status(replayRequest);
             mockServer.verify();
         });
@@ -309,7 +310,7 @@ public class ReplayClientTest {
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/" + id + "/update"))
                 .andRespond(withSuccess());
 
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             replayClient.update(replayRequest);
             mockServer.verify();
         });
@@ -330,7 +331,7 @@ public class ReplayClientTest {
                 .andExpect(content().formData(replayRequest.paramMap))
                 .andRespond(withSuccess());
 
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             replayClient.update(replayRequest);
             mockServer.verify();
         });
@@ -368,7 +369,7 @@ public class ReplayClientTest {
                 .andExpect(content().formData(replayRequest.paramMap))
                 .andRespond(withSuccess());
 
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
                     replayClient.updateAll(replayRequest);
                     mockServer.verify();
         });
@@ -405,7 +406,7 @@ public class ReplayClientTest {
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/" + id + "/stop"))
                 .andRespond(withSuccess());
 
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             replayClient.stop(replayRequest);
             mockServer.verify();
         });
@@ -458,7 +459,7 @@ public class ReplayClientTest {
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/" + id + "/resume"))
                 .andRespond(withSuccess());
 
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             replayClient.resume(replayRequest);
             mockServer.verify();
         });
@@ -511,7 +512,7 @@ public class ReplayClientTest {
         mockServer.expect(requestTo(EXPECTED_REPLAY_URI + "/" + id + "/delete"))
                 .andRespond(withSuccess());
 
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             replayClient.delete(replayRequest);
             mockServer.verify();
         });

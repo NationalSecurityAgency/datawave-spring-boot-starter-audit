@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
@@ -123,7 +124,7 @@ public class AuditClientTest {
                 .withQueryLogic("QueryLogic")
                 .build();
         //@formatter:on
-        Assertions.assertThrows(IllegalArgumentException.class, () -> AuditClient.validate(auditRequest, new TestAuditParameters()));
+        assertThrows(IllegalArgumentException.class, () -> AuditClient.validate(auditRequest, new TestAuditParameters()));
     }
     
     @Test
@@ -149,7 +150,7 @@ public class AuditClientTest {
                 .andExpect(content().formData(auditRequest.paramMap))
                 .andRespond(withServerError());
 
-        Assertions.assertThrows(HttpServerErrorException.InternalServerError.class, () -> auditClient.submit(auditRequest));
+        assertThrows(HttpServerErrorException.InternalServerError.class, () -> auditClient.submit(auditRequest));
         mockServer.verify();
 
         //@formatter:on
@@ -168,7 +169,7 @@ public class AuditClientTest {
             .withQueryLogic("QueryLogic")
             .build();
         //@formatter:on
-        Assertions.assertThrows(IllegalArgumentException.class, () -> AuditClient.validate(auditRequest, new AuditParameters()));
+        assertThrows(IllegalArgumentException.class, () -> AuditClient.validate(auditRequest, new AuditParameters()));
     }
     
     @Test
@@ -184,7 +185,7 @@ public class AuditClientTest {
             .withQueryLogic("QueryLogic")
             .build();
         //@formatter:on
-        Assertions.assertThrows(IllegalArgumentException.class, () -> AuditClient.validate(auditRequest, new AuditParameters()));
+        assertThrows(IllegalArgumentException.class, () -> AuditClient.validate(auditRequest, new AuditParameters()));
     }
     
     /**

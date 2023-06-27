@@ -1,7 +1,7 @@
 package datawave.microservice.audit;
 
-import datawave.microservice.audit.config.AuditServiceConfiguration;
-import datawave.microservice.audit.replay.ReplayClient;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import datawave.microservice.audit.config.AuditServiceConfiguration;
+import datawave.microservice.audit.replay.ReplayClient;
 
 /**
  * Tests to make sure that bean injection for {@link AuditClient} can be disabled via config {@code audit.enabled=false})

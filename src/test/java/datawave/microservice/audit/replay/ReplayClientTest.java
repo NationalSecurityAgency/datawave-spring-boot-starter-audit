@@ -1,9 +1,15 @@
 package datawave.microservice.audit.replay;
 
-import datawave.microservice.audit.AuditServiceProvider;
-import datawave.microservice.audit.TestUtils;
-import datawave.microservice.audit.config.AuditServiceConfiguration;
-import datawave.microservice.authorization.user.DatawaveUserDetails;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,15 +30,10 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
+import datawave.microservice.audit.AuditServiceProvider;
+import datawave.microservice.audit.TestUtils;
+import datawave.microservice.audit.config.AuditServiceConfiguration;
+import datawave.microservice.authorization.user.DatawaveUserDetails;
 
 /**
  * Tests {@link ReplayClient} and {@link ReplayClient.Request} functionality and ensures that audit {@code audit.enabled=true})

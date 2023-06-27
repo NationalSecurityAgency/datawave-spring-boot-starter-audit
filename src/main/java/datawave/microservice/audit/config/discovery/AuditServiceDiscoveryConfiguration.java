@@ -1,7 +1,5 @@
 package datawave.microservice.audit.config.discovery;
 
-import datawave.microservice.audit.AuditServiceProvider;
-import datawave.microservice.audit.config.AuditServiceProperties;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +24,9 @@ import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.retry.interceptor.RetryInterceptorBuilder;
 import org.springframework.retry.interceptor.RetryOperationsInterceptor;
+
+import datawave.microservice.audit.AuditServiceProvider;
+import datawave.microservice.audit.config.AuditServiceProperties;
 
 @Configuration
 @ConditionalOnBean(DiscoveryClient.class)

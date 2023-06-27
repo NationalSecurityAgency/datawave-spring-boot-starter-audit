@@ -1,10 +1,5 @@
 package datawave.microservice.audit.replay;
 
-import com.google.common.base.Preconditions;
-import datawave.microservice.audit.AuditServiceProvider;
-import datawave.microservice.audit.replay.status.Status;
-import datawave.microservice.authorization.jwt.JWTRestTemplate;
-import datawave.microservice.authorization.user.DatawaveUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +14,13 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import com.google.common.base.Preconditions;
+
+import datawave.microservice.audit.AuditServiceProvider;
+import datawave.microservice.audit.replay.status.Status;
+import datawave.microservice.authorization.jwt.JWTRestTemplate;
+import datawave.microservice.authorization.user.DatawaveUserDetails;
 
 /**
  * Simple rest client for submitting requests to the audit replay service

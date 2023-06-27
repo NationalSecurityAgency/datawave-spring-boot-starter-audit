@@ -1,13 +1,7 @@
 package datawave.microservice.audit;
 
-import com.google.common.base.Preconditions;
-import datawave.marking.SecurityMarking;
-import datawave.microservice.authorization.jwt.JWTRestTemplate;
-import datawave.microservice.authorization.user.DatawaveUserDetails;
-import datawave.security.authorization.DatawaveUser;
-import datawave.webservice.common.audit.AuditParameters;
-import datawave.webservice.common.audit.Auditor;
-import datawave.webservice.common.audit.Auditor.AuditType;
+import java.util.function.Supplier;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +19,15 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.function.Supplier;
+import com.google.common.base.Preconditions;
+
+import datawave.marking.SecurityMarking;
+import datawave.microservice.authorization.jwt.JWTRestTemplate;
+import datawave.microservice.authorization.user.DatawaveUserDetails;
+import datawave.security.authorization.DatawaveUser;
+import datawave.webservice.common.audit.AuditParameters;
+import datawave.webservice.common.audit.Auditor;
+import datawave.webservice.common.audit.Auditor.AuditType;
 
 /**
  * Simple rest client for submitting requests to the audit service

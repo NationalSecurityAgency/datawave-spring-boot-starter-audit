@@ -1,10 +1,11 @@
 package datawave.microservice.audit.config.discovery;
 
-import datawave.microservice.audit.AuditServiceProvider;
-import datawave.microservice.audit.config.AuditServiceProperties;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.retry.annotation.Retryable;
+
+import datawave.microservice.audit.AuditServiceProvider;
+import datawave.microservice.audit.config.AuditServiceProperties;
 
 public class RetryableServiceProvider extends AuditServiceProvider {
     

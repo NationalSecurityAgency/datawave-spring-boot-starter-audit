@@ -15,7 +15,7 @@ import datawave.webservice.common.audit.AuditParameters;
 public class AuditClientConfiguration {
     @Bean
     @Qualifier("auditRequestValidator")
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(name = "auditRequestValidator")
     public Supplier<AuditParameters> auditValidationSupplier() {
         return AuditParameters::new;
     }

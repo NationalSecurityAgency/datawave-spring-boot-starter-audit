@@ -23,26 +23,26 @@
         <url>https://github.com/NationalSecurityAgency/datawave-spring-boot-starter-audit</url>
     </scm>
     <properties>
-        <version.audit-api>4.0.0</version.audit-api>
-        <version.authorization-api>4.0.0</version.authorization-api>
-        <version.starter>4.0.0</version.starter>
+        <version.datawave.audit-api>4.0.0</version.datawave.audit-api>
+        <version.datawave.authorization-api>4.0.0</version.datawave.authorization-api>
+        <version.datawave.starter>4.0.0</version.datawave.starter>
     </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>gov.nsa.datawave.microservice</groupId>
                 <artifactId>audit-api</artifactId>
-                <version>${version.audit-api}</version>
+                <version>${version.datawave.audit-api}</version>
             </dependency>
             <dependency>
                 <groupId>gov.nsa.datawave.microservice</groupId>
                 <artifactId>authorization-api</artifactId>
-                <version>${version.authorization-api}</version>
+                <version>${version.datawave.authorization-api}</version>
             </dependency>
             <dependency>
                 <groupId>gov.nsa.datawave.microservice</groupId>
                 <artifactId>spring-boot-starter-datawave</artifactId>
-                <version>${version.starter}</version>
+                <version>${version.datawave.starter}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -8,7 +8,7 @@
         <relativePath>../../microservice-service-parent/pom.xml</relativePath>
     </parent>
     <artifactId>spring-boot-starter-datawave-audit</artifactId>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>4.0.1</version>
     <url>https://code.nsa.gov/datawave-spring-boot-starter-audit</url>
     <licenses>
         <license>
@@ -25,7 +25,7 @@
     <properties>
         <version.microservice.audit-api>4.0.0</version.microservice.audit-api>
         <version.microservice.authorization-api>4.0.0</version.microservice.authorization-api>
-        <version.microservice.starter>4.0.0</version.microservice.starter>
+        <version.microservice.starter>4.0.1</version.microservice.starter>
     </properties>
     <dependencyManagement>
         <dependencies>

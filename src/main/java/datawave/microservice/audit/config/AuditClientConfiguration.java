@@ -16,6 +16,7 @@ public class AuditClientConfiguration {
     @Bean
     @Qualifier("auditRequestValidator")
     @ConditionalOnMissingBean(name = "auditRequestValidator")
+    @ConditionalOnProperty(name = "datawave.defaults.AuditParametersSupplier.enabled", havingValue = "true", matchIfMissing = true)
     public Supplier<AuditParameters> auditValidationSupplier() {
         return AuditParameters::new;
     }
